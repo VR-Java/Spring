@@ -1,3 +1,7 @@
+/*
+1 Ticket = 1 Price
+==========================================================================
+*/
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
