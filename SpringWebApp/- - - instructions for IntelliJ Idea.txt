@@ -1,0 +1,47 @@
+How to create Spring MVC Web Application in IntelliJ Idea:
+
+1. Create new Maven project without any archtype. Enable Auto-Import
+2. Modify pom.xml:
+ * add tag <packaging>war</packaging>
+ * add all dependencies
+3. In folder "main" create new folder "webapp"
+4. In folder "webapp" create new folder "WEB-INF"
+5. In folder "WEB-INF" create new folder "views"
+6. In folder "WEB-INF" create new file web.xml and open it
+7. Write code in file web.xml, code looks like follow:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+  <display-name>Spring Web App</display-name>
+</web-app>
+
+8. Configure Web framework:
+ * pop-up window in bottom left corner
+or
+ * File - Project structure (Ctrl+Alt+Shift+S) - Modules
+ - add (+) - Web - Create artifact - Apply - OK
+9. Create new package "controller" in folder "java" (ua.logos.controller)
+10. Create class BaseController 
+ * annotate it like @Controller
+ * write method showHome(), which simply returns String "home"
+ * annotate this method with @GetMapping("/")
+11. Create home.jsp file in folder /webapp/WEB-INF/views/
+ * write tag <h1>Hello World!</h1> 
+12. Configure your application:
+12.1. Create package "config" (ua.logos.config)
+12.2. Create class WebAppInitializer:
+ * implement WebApplicationInitializer
+ * override its method onStartup():
+12.3. Create class WebMvcConfig:
+ * annotate it with @Configuration, @EnableWebMvc, @ComponentScan(basePackages = "ua.logos.controller")
+ * implement WebMvcConfigurer
+ * override its 2 methods: 
+ ** addResourceHandlers() -> set access to *.css, *.js
+ ** configureViewResolvers() - -> set prefix and sufix for jsp-files
+
+13. Confugure Tomcat:
+ * Run -> Edit configuration - (+) - Tomcat Server - Local - Fix Warning: No artifacts marked for deployment -> WebAppTEST:war exploded - OK
+14. Run
+15. Open your favorite WebBrowser and go on url http://localhost:8080/ 
+ * You should see text "Hello World!"
+
